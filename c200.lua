@@ -272,7 +272,7 @@ function s.MemoryOperation(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCode(EFFECT_FORBIDDEN)
 		e3:SetTargetRange(0x7f,0x7f)
 		e3:SetTarget(s.BanTarget)
-		e3:SetCondition(s.BanCon)
+		--e3:SetCondition(s.BanCon)
 		e3:SetLabel(tc:GetCode())
 		Duel.RegisterEffect(e3,tp)
 		end
@@ -332,7 +332,7 @@ function s.MemoryOperation2(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetCode(EFFECT_FORBIDDEN)
 		e3:SetTargetRange(0x7f,0x7f)
 		e3:SetTarget(s.BanTarget2)
-		e3:SetCondition(s.BanCon)
+		--e3:SetCondition(s.BanCon)
 		e3:SetLabel(tc:GetCode())
 		Duel.RegisterEffect(e3,tp)
 		end
@@ -375,6 +375,6 @@ function s.HelperFilter(c,tp)
 	return c:IsCode(41,600402)
 end
 
-function s.BanCon(e,tp,eg,ep,ev,re,r,rp)
-	c:GetCode()~=(1101)
-end
+--function s.BanCon(e,tp,eg,ep,ev,re,r,rp)
+	--c:GetCode()~=(1101)
+--end
