@@ -157,7 +157,7 @@ end
 
 --Manifestation (e1)
 function s.ManifestFilter(c,tp)
-	return c:IsCode(1,4,6,11,20,28,32,34,41,47,48,52)
+	return c:IsCode(1,4,6,11,20,28,32,34,41,47,48,52) and c:GetType()&(TYPE_EQUIP)~=(TYPE_EQUIP)
 	--S. aureus (1)
 	--S. pneumoniae (4)
 	--S. agalactiae (6)
