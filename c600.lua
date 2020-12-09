@@ -122,7 +122,7 @@ function s.initial_effect(c)
 	local e12=Effect.CreateEffect(c)
 	e12:SetDescription(aux.Stringid(id,2))
 	e12:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
-	e12:SetCode(EVENT_BE_BATTLE_TARGET))
+	e12:SetCode(EVENT_BE_BATTLE_TARGET)
 	e12:SetOperation(s.EvasionOperation)
 	c:RegisterEffect(e12)
 
@@ -286,7 +286,7 @@ end
 
 --Battle Rule #7: Evasion (e11)
 function s.EvasionOperation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) return end
+	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
 	Duel.ChangeAttackTarget(nil)
 end	
 

@@ -279,7 +279,7 @@ end
 
 --Battle Rule #6: Evasion (e11)
 function s.EvasionOperation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) return end
+	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
 	Duel.ChangeAttackTarget(nil)
 end
 
