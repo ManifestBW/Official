@@ -12,7 +12,7 @@ function s.initial_effect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_HAND)
-	e1:SetCost(s.ManifestCost)
+	--e1:SetCost(s.ManifestCost)
 	e1:SetTarget(s.ManifestTarget)
 	e1:SetCondition(s.ManifestCondition)
 	e1:SetOperation(s.ManifestOperation)
@@ -157,21 +157,30 @@ end
 
 --Manifestation (e1)
 function s.ManifestFilter(c,tp)
-	return c:IsCode(101,102,1011,1021)
-	--S. aureus (101)
-	--H. influenzae (102)
-	--S. pneumoniae (1011)
-	--K. pneumoniae (1021)
+	return c:IsCode(1,4,6,11,20,28,32,34,41,47,48,52)
+	--S. aureus (1)
+	--S. pneumoniae (4)
+	--S. agalactiae (6)
+	--L. monocytogenes (11)
+	--N. asteroides (20)
+	--P. aeruginosa (28)
+	--K. pneumoniae (32)
+	--M. catarrhalis (34)
+	--H. influenzae (41)
+	--A. baumannii (47)
+	--B. fragilis (48)
+	--L. pneumophilia (52)
+
+
 end
 
+--Manifestation
 function s.AnchorLimit(e,c)
 	return e:GetOwner()==c
 end
-
 function s.ManifestCondition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() 
 end
-
 function s.ManifestCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,3,REASON_COST) end
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
@@ -180,7 +189,6 @@ function s.ManifestCost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.NegateEffect(0)
 	end
 end
-
 function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -188,17 +196,17 @@ function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local g=Duel.SelectTarget(tp,s.ManifestFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local sg=Duel.GetMatchingGroup(s.ManifestFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
+	local g=sg:RandomSelect(tp,1)
+	Duel.SetTargetCard(g)
 end
-
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		local g=Duel.GetTargetCards(e)
-		if ft<#g then return end
+		--if ft<#g then return end
 		Duel.BreakEffect()
 		for tc in aux.Next(g) do
 			Duel.Equip(tp,tc,c,false)
@@ -222,7 +230,6 @@ function s.SymptomFilter(c)
 	--Cough I (402)
 	--Dyspnea (403)
 end
-
 function s.SymptomCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,3,REASON_COST) end
 	if Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
@@ -231,11 +238,9 @@ function s.SymptomCost(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.NegateEffect(0)
 	end
 end
-
 function s.SymptomTarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.SymptomFilter,tp,LOCATION_EXTRA,0,1,nil) end
 end
-
 function s.SymptomCondition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer() and e:GetHandler():GetOverlayCount()<4
 end
@@ -258,7 +263,6 @@ end
 function s.DefenseFilter(c)
 	return c:GetDefense()>=0
 end
-
 function s.DefenseValue(e,c)
 	local g=e:GetHandler():GetOverlayGroup():Filter(s.DefenseFilter,nil)
 	return g:GetSum(Card.GetDefense)
@@ -272,7 +276,6 @@ end
 function s.LifeLossCondition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetBattleTarget()~=nil
 end
-
 function s.LifeLossOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=c:GetBattleTarget()
@@ -299,9 +302,8 @@ end
 
 --Battle Rule #7: Evasion (e10)
 function s.EvasionOperation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-	return Duel.ChangeAttackTarget(nil)
-	else Duel.NegateEffect(0) end
+	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
+	Duel.ChangeAttackTarget(nil)
 end
 
 --Position Cannot Change (e11)
@@ -316,7 +318,6 @@ function s.ExistenceCondition(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return c:GetEquipCount()<1
 end
-
 function s.ExistenceOperation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Destroy(e:GetHandler(),REASON_EFFECT)
 end
@@ -326,11 +327,9 @@ function s.OnslaughtCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,3,REASON_COST) end
 	Duel.RemoveCounter(tp,1,0,0x1b,3,REASON_COST)
 end
-
 function s.OnslaughtCondition(e,tp,eg,ep,ev,re,r,rp,chk)
 	return e:GetHandler():GetOverlayGroup():IsExists(Card.IsCode,1,nil,400)
 end
-
 function s.OnslaughtOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToBattle() then
