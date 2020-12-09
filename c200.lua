@@ -376,5 +376,5 @@ function s.HelperFilter(c,tp)
 end
 
 function s.BanCon(e,tp,eg,ep,ev,re,r,rp)
-	c:GetCode()~=1101
+	c:GetCode()~=(1101)
 end
