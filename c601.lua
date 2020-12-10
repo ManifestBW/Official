@@ -134,7 +134,7 @@ function s.initial_effect(c)
 	--Over-Manifest "Helper-0 T-Lymphocyte" (e14)
 	local e14=Effect.CreateEffect(c)
 	e14:SetDescription(aux.Stringid(id,5))
-	e14:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP
+	e14:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e14:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e14:SetType(EFFECT_TYPE_QUICK_O)
 	e14:SetRange(LOCATION_MZONE)
