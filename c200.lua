@@ -138,7 +138,7 @@ end
 
 --Antigen Sampling (e2)
 function s.AntigenFilter(c,e)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsType(TYPE_EQUIP) and c:GetEquipTarget()==Duel.GetAttacker()
+	return c:IsType(TYPE_SPELL+TYPE_VIRUS) and c:IsType(TYPE_EQUIP) and c:GetEquipTarget()==Duel.GetAttacker()
 end
 function s.AntigenTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() end
