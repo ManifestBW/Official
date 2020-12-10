@@ -318,7 +318,7 @@ end
 
 --Bind CD28--[o--CD8086 (e14)
 function s.PhagocyteFilter(c,code)
-	return c:IsFaceup() and c:IsCode(602,603,980)
+	return c:IsFaceup() and c:IsCode(602,603,980) and c:GetEquipCount()>0
 end
 function s.CD28Condition(e)
 	return Duel.IsExistingMatchingCard(s.PhagocyteFilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
