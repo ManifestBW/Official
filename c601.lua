@@ -20,18 +20,18 @@ function s.initial_effect(c)
 	--(e2)
 
 	--Defender Rule #1: Avatar Interceptions (e3)
-	--local e3=Effect.CreateEffect(c)
-	--e3:SetDescription(aux.Stringid(id,1))
-	--e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
-	--e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
-	--e3:SetCode(EVENT_BE_BATTLE_TARGET)
-	--e3:SetRange(LOCATION_MZONE)
-	--e3:SetCondition(s.cbcon)
-	--e3:SetCost(s.cbcost)
-	--e3:SetTarget(s.cbtg)
-	--e3:SetOperation(s.cbop)
-	--e3:SetValue(1)
-	--c:RegisterEffect(e3)
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(id,1))
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_NEGATE)
+	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetCode(EVENT_BE_BATTLE_TARGET)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetCondition(s.cbcon)
+	e3:SetCost(s.cbcost)
+	e3:SetTarget(s.cbtg)
+	e3:SetOperation(s.cbop)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)
 
 	--Defender Rule #2: Direct Interceptions (e4)
 	local e4=Effect.CreateEffect(c)
@@ -120,7 +120,7 @@ function s.initial_effect(c)
 	--Over-Manifest "Cytotoxic T-Lymphocyte" (e13)
 	local e13=Effect.CreateEffect(c)
 	e13:SetDescription(aux.Stringid(id,4))
-	e13:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
+	e13:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e13:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e13:SetType(EFFECT_TYPE_QUICK_O)
 	e13:SetRange(LOCATION_MZONE)
@@ -134,11 +134,11 @@ function s.initial_effect(c)
 	--Over-Manifest "Helper-0 T-Lymphocyte" (e14)
 	local e14=Effect.CreateEffect(c)
 	e14:SetDescription(aux.Stringid(id,5))
-	e14:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DAMAGE_STEP)
 	e14:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e14:SetType(EFFECT_TYPE_QUICK_O)
 	e14:SetRange(LOCATION_MZONE)
 	e14:SetCode(EVENT_FREE_CHAIN)
+	e14:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e14:SetCountLimit(1)
 	e14:SetCost(s.spcost3)
 	e14:SetTarget(s.sptg3)
@@ -152,7 +152,7 @@ function s.initial_effect(c)
 	e15:SetCode(EFFECT_CHANGE_CODE)
 	e15:SetRange(LOCATION_MZONE)
 	e15:SetCondition(s.CD28Condition)
-	e15:SetValue(928)
+	e15:SetValue(28)
 	c:RegisterEffect(e15)
 
 end
@@ -167,6 +167,7 @@ end
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.RemoveCounter(tp,1,0,0x1b,0,REASON_COST)
 end
+
 
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
@@ -186,28 +187,28 @@ end
 --(e2)
 
 --Defender Rule: Avatar Interceptions (e3)
---function s.cbcon(e,tp,eg,ep,ev,re,r,rp)
-	--local c=e:GetHandler()
-	--local bt=eg:GetFirst()
-	--return r~=REASON_REPLACE and c~=bt and bt:IsFaceup() and bt:GetControler()==c:GetControler()
---end
---function s.cbcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	--if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,4,REASON_COST) end
-	--if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
-		--Duel.RemoveCounter(tp,1,0,0x1b,4,REASON_COST)
-		--else 
-		--Duel.NegateEffect(0)
-	--end
---end
---function s.cbtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	--if chk==0 then return Duel.GetAttacker():GetAttackableTarget():IsContains(e:GetHandler()) end
---end
---function s.cbop(e,tp,eg,ep,ev,re,r,rp)
-	--local c=e:GetHandler()
-	--if c:IsRelateToEffect(e) and not Duel.GetAttacker():IsImmuneToEffect(e) then
-		--Duel.ChangeAttackTarget(c)
-	--end
---end
+function s.cbcon(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local bt=eg:GetFirst()
+	return r~=REASON_REPLACE and c~=bt and bt:IsFaceup() and bt:GetControler()==c:GetControler()
+end
+function s.cbcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,4,REASON_COST) end
+	if Duel.SelectYesNo(tp,aux.Stringid(id,1)) then
+		Duel.RemoveCounter(tp,1,0,0x1b,4,REASON_COST)
+		else 
+		Duel.NegateEffect(0)
+	end
+end
+function s.cbtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.GetAttacker():GetAttackableTarget():IsContains(e:GetHandler()) end
+end
+function s.cbop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and not Duel.GetAttacker():IsImmuneToEffect(e) then
+		Duel.ChangeAttackTarget(c)
+	end
+end
 
 --Defender Rule: Direct Interceptions (e4)
 function s.intcon(e,tp,eg,ep,ev,re,r,rp)
@@ -249,8 +250,9 @@ end
 
 --Battle Rule #6: Evasion (e11)
 function s.EvasionOperation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then return end
-	Duel.ChangeAttackTarget(nil)
+	if Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+	return Duel.ChangeAttackTarget(nil)
+	else Duel.NegateEffect(0) end
 end
 
 --Over-Manifest "Cytotoxic T-Lymphocyte" (e12)
