@@ -5,14 +5,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x8) --Distress Counters
 	c:EnableCounterPermit(0x7) --Delirium Counters
 	c:SetCounterLimit(0x1b,6) --ATP Counters Limit
-	--aux.AddFieldSkillProcedure(c,2,false)
-	
-	local e0=Effect.CreateEffect(c)
-	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e0:SetCode(EVENT_STARTUP)
-	e0:SetRange(0x100)
-	c:RegisterEffect(e0)
+	aux.AddFieldSkillProcedure(c,2,false)
 
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
