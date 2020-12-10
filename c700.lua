@@ -5,7 +5,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x8) --Distress Counters
 	c:EnableCounterPermit(0x7) --Delirium Counters
 	c:SetCounterLimit(0x1b,6) --ATP Counters Limit
-	aux.AddFieldSkillProcedure(c,1,false)
+	aux.AddFieldSkillProcedure(c,2,false)
 	
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
