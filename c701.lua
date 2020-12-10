@@ -6,8 +6,7 @@ function s.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_STARTUP)
-	e1:SetRange(0xff)
-	e1:SetOperation(s.stop)
+	e1:SetRange(F_ZONE)
 	c:RegisterEffect(e1)
 
 	--Confirm
