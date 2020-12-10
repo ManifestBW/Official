@@ -322,5 +322,5 @@ function s.PhagocyteFilter(c,code)
 end
 function s.CD28Condition(e)
 	return Duel.IsExistingMatchingCard(s.PhagocyteFilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
-	and e:GetHandler():
+	and e:GetHandler():GetEquipCount()>1
 end
