@@ -298,4 +298,5 @@ function s.NaiveFilter(c,code)
 end
 function s.CD8086Condition(e)
 	return Duel.IsExistingMatchingCard(s.NaiveFilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
+	and e:GetHandler():GetEquipCount()>0
 end

@@ -146,14 +146,14 @@ function s.initial_effect(c)
 	c:RegisterEffect(e14)
 
 	--CD28--[o--CD80/86(B7) Binding (e15)
-	--local e15=Effect.CreateEffect(c)
-	--e15:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
-	--e15:SetType(EFFECT_TYPE_SINGLE)
-	--e15:SetCode(EFFECT_CHANGE_CODE)
-	--e15:SetRange(LOCATION_MZONE)
-	--e15:SetCondition(s.CD28Condition)
-	--e15:SetValue(928)
-	--c:RegisterEffect(e15)
+	local e15=Effect.CreateEffect(c)
+	e15:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e15:SetType(EFFECT_TYPE_SINGLE)
+	e15:SetCode(EFFECT_CHANGE_CODE)
+	e15:SetRange(LOCATION_MZONE)
+	e15:SetCondition(s.CD28Condition)
+	e15:SetValue(928)
+	c:RegisterEffect(e15)
 
 end
 
@@ -322,4 +322,5 @@ function s.PhagocyteFilter(c,code)
 end
 function s.CD28Condition(e)
 	return Duel.IsExistingMatchingCard(s.PhagocyteFilter,0,LOCATION_MZONE,LOCATION_MZONE,1,nil)
+	and e:GetHandler():
 end
