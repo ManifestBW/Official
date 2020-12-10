@@ -170,8 +170,6 @@ function s.ManifestFilter(c,tp)
 	--A. baumannii (47)
 	--B. fragilis (48)
 	--L. pneumophilia (52)
-
-
 end
 
 --Manifestation
