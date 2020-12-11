@@ -19,7 +19,7 @@ function s.ShurikenCondition(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)>1
 end
 function s.ShurikenFilter(c)
-	return c:IsFaceup() and c:IsCode(28,604)
+	return c:IsFaceup() and c:IsCode(928,604)
 end
 function s.ShurikenTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return s.ShurikenFilter(chkc) end

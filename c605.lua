@@ -163,7 +163,7 @@ function s.MainFilter(c,xyz,sumtype,tp)
 	and c:IsAttribute(ATTRIBUTE_LIGHT,xyz,sumtype,tp)
 end
 function s.IFNyIL12filter(c)
-	return c:IsCode(410)
+	return c:IsCode(400)
 end
 function s.CytokineFilter(c,tp,lc)
 	return c:IsFaceup()

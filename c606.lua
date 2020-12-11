@@ -174,13 +174,13 @@ function s.MainFilter(c,xyz,sumtype,tp)
 	and c:IsAttribute(ATTRIBUTE_LIGHT,xyz,sumtype,tp)
 end
 function s.IL2Filter(c)
-	return c:IsCode(4002)
+	return c:IsCode(402)
 end
 function s.IL4Filter(c)
-	return c:IsCode(4004)
+	return c:IsCode(404)
 end
 function s.IFNFilter(c)
-	return c:IsCode(410)
+	return c:IsCode(400)
 end
 function s.CytokineFilter(c,tp,lc)
 	return c:IsFaceup()
@@ -342,7 +342,7 @@ function s.SecretionCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
 end
 function s.SecretionFilter1(c,tp)
-	return c:IsCode(410)
+	return c:IsCode(400)
 end
 function s.SecretionFilter2(c)
 	return c:IsFaceup() and (c:IsAttribute(0x02) or c:IsCode(601,604))

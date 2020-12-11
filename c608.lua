@@ -269,7 +269,7 @@ function s.SecretionCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RemoveCounter(tp,1,0,0x1b,4,REASON_COST)
 end
 function s.SecretionFilter1(c,tp)
-	return c:IsCode(410)
+	return c:IsCode(400)
 end
 function s.SecretionFilter2(c)
 	return c:IsFaceup()
