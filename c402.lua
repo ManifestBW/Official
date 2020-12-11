@@ -5,13 +5,14 @@ function s.initial_effect(c)
 	c:EnableReviveLimit()
 
 	local e2=Effect.CreateEffect(c)
-	e2:SetDescription(aux.Stringid(id,1))
-	e2:SetCategory(CATEGORY_REMOVE)
+	e2:SetProperty(EFFECT_FLAG_NO_TURN_RESET+EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_TRIGGER_F)
+	e2:SetCategory(CATEGORY_REMOVE)
 	e2:SetCode(EVENT_BATTLED)
 	e2:SetCondition(s.rmcon)
-	e2:SetTarget(s.rmtg)
 	e2:SetOperation(s.rmop)
+	e2:SetTarget(s.rmtg)
+	e2:SetCountLimit(2)
 	c:RegisterEffect(e2)
 
 end
