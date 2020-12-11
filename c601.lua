@@ -218,6 +218,7 @@ function s.inttgt(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function s.intop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
+	if not Duel.SelectYesNo(tp,aux.Stringid(id,1)) then return end
 	if c:IsRelateToEffect(e) and not Duel.GetAttacker():IsImmuneToEffect(e) then
 		Duel.ChangeAttackTarget(c)
 	end
