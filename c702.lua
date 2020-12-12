@@ -31,7 +31,6 @@ end
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.stfilter,tp,0xff,0,c)
 	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-	Duel.Breakeffect()
 	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),tp,LOCATION_FZONE,0,c)
 	g2:ForEach(Card.AddCounter,0x4,12)
 end
