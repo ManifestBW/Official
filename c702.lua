@@ -24,7 +24,7 @@ function s.initial_effect(c)
 end
 
 function s.stfilter(c)
-	return c:IsCode(1)
+	return c:IsCode(100)
 end
 
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
