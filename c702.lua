@@ -29,7 +29,5 @@ end
 
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.stfilter,tp,0xff,0,c)
-	if #g>0 and Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true) then
-		c:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,0)
-	end
+	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 end
