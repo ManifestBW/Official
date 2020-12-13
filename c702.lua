@@ -54,7 +54,7 @@ end
 function s.op1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.stfilter,tp,LOCATION_HAND+LOCATION_DECK,0,0)
 	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,c)
+	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,0)
 	g2:ForEach(Card.AddCounter,0x4,12)
 end
 
