@@ -1,6 +1,8 @@
 --Mitochondrion
 local s,id=GetID()
 function s.initial_effect(c)
+	
+	c:EnableCounterPermit(0x4)
 	c:EnableCounterPermit(0x1b) --ATP Counters
 	c:EnableCounterPermit(0x8) --Distress Counters
 	c:EnableCounterPermit(0x7) --Delirium Counters
