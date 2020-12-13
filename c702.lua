@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_COUNTER)
 	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e2:SetCountLimit(2)
+	e2:SetCountLimit(1)
 	e2:SetCode(EVENT_PHASE+PHASE_DRAW)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetCondition(s.con1)
@@ -53,7 +53,7 @@ end
 
 function s.op1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.stfilter,tp,LOCATION_HAND+LOCATION_DECK,0,c)
-	Duel.MoveToField(g:GetFirst(),tp,0,LOCATION_SZONE,POS_FACEUP,true)
+	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,c)
 	g2:ForEach(Card.AddCounter,0x4,12)
 end
