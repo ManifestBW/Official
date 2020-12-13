@@ -44,7 +44,7 @@ function s.initial_effect(c)
 end
 
 function s.con1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetTurnCount()==1
+	return Duel.GetTurnCount()==1 or Duel.GetTurnCount()==2
 end
 
 function s.stfilter(c)
