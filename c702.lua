@@ -68,7 +68,7 @@ function s.stfilter2(c)
 end
 
 function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCounter(0,1,1,0x4)>=2
+	return Duel.GetCounter(0,1,1,0x4)<=2
 end
 
 function s.target(e,c)
