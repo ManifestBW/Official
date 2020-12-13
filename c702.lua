@@ -38,7 +38,7 @@ function s.initial_effect(c)
 	e4:SetCode(EFFECT_DISABLE)
 	e4:SetRange(LOCATION_MZONE)
 	e4:SetTargetRange(0,LOCATION_MZONE)
-	e4:SetTarget(s.Target)
+	e4:SetTarget(s.target)
 	c:RegisterEffect(e4)
 
 end
@@ -62,6 +62,6 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCounter(0,1,1,0x4)>=5
 end
 
---function s.Target(e,tp,eg,ep,ev,re,r,rp,chk)
-	--return c:IsCode(604,605,606)
---end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	return c:IsCode(604,605,606)
+end
