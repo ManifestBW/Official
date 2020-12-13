@@ -25,6 +25,14 @@ function s.initial_effect(c)
 	e2:SetOperation(s.op1)
 	Duel.RegisterEffect(e2,tp)
 
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetCondition(s.thcon)
+	e3:SetTargetRange(LOCATION_MZONE,0)
+	c:RegisterEffect(e3)
+
 end
 
 function s.con1(e,tp,eg,ep,ev,re,r,rp)
@@ -40,4 +48,8 @@ function s.op1(e,tp,eg,ep,ev,re,r,rp)
 	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
 	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,c)
 	g2:ForEach(Card.AddCounter,0x4,12)
+end
+
+function s.thcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCounter(0,1,1,0x4)>=5
 end
