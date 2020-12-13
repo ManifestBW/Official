@@ -71,6 +71,10 @@ function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCounter(0,1,1,0x4)>=2
 end
 
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	return Duel.GetMatchingGroup(s.stfilter2,tp,LOCATION_ONFIELD,0,c)
+function s.target(e,c)
+	return c:IsCode(604,605,606)
 end
+
+--function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	--return Duel.GetMatchingGroup(s.stfilter2,tp,LOCATION_ONFIELD,0,c)
+--end
