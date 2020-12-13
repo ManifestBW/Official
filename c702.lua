@@ -23,7 +23,7 @@ function s.initial_effect(c)
 	e2:SetRange(LOCATION_FZONE)
 	e2:SetCondition(s.con1)
 	e2:SetOperation(s.op1)
-	Duel.RegisterEffect(e2)
+	c:RegisterEffect(e2)
 
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_FIELD)
