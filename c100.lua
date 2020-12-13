@@ -92,5 +92,5 @@ function s.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,c)
-	g:ForEach(Card.RemoveCounter,0x4,1,1-tp,LOCATION_FZONE)
+	g:ForEach(Card.RemoveCounter,0x4,1,LOCATION_FZONE,0)
 end
