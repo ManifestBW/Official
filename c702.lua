@@ -62,6 +62,6 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCounter(0,1,1,0x4)>=5
 end
 
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.target(c)
 	return c:IsCode(604,605,606)
 end
