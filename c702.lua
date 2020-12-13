@@ -63,5 +63,5 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.Target(e,tp,eg,ep,ev,re,r,rp,chk)
-	return IsCode(604,605,606)
+	return c:IsCode(604,605,606)
 end
