@@ -2,35 +2,42 @@
 
 local s,id=GetID()
 function s.initial_effect(c)
-	c:EnableCounterPermit(0x4) --CD4 Counters
 	c:EnableCounterPermit(0x1b) --ATP Counters
 	c:EnableCounterPermit(0x8) --Distress Counters
 	c:EnableCounterPermit(0x7) --Delirium Counters
 	c:SetCounterLimit(0x1b,6) --ATP Counters Limit
 	aux.AddFieldSkillProcedure(c,2,false)
 
-	local e0=Effect.CreateEffect(c)
-	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
-	e0:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-	e0:SetCode(EVENT_STARTUP)
-	e0:SetRange(0xff)
-	e0:SetOperation(s.stop)
-	c:RegisterEffect(e0)
-
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	c:RegisterEffect(e1)
 
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(id,0))
+	e2:SetCategory(CATEGORY_COUNTER)
+	e2:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e2:SetCountLimit(1)
+	e2:SetCode(EVENT_PHASE+PHASE_DRAW)
+	e2:SetRange(LOCATION_FZONE)
+	e2:SetCondition(s.con1)
+	e2:SetOperation(s.op1)
+	Duel.RegisterEffect(e2,tp)
+
+end
+
+function s.con1(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetTurnCount()==1
 end
 
 function s.stfilter(c)
 	return c:IsCode(100)
 end
 
-function s.stop(e,tp,eg,ep,ev,re,r,rp)
+function s.op1(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(s.stfilter,tp,0xff,0,c)
 	Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_SZONE,POS_FACEUP,true)
-	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),tp,LOCATION_FZONE,0,c)
+	local g2=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x4,12),1-tp,LOCATION_FZONE,0,c)
 	g2:ForEach(Card.AddCounter,0x4,12)
 end
