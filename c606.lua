@@ -199,9 +199,9 @@ end
 function s.ManifestFilter(c,tp,lc)
 	return c:IsFaceup()
 	and c:IsCode(604)
-	--and c:GetOverlayGroup():IsExists(s.IL2Filter,1,nil)
-	--and c:GetOverlayGroup():IsExists(s.IL4Filter,1,nil)
-	--and not c:GetOverlayGroup():IsExists(s.IFNFilter,1,nil)
+	and c:GetOverlayGroup():IsExists(s.IL2Filter,1,nil)
+	and c:GetOverlayGroup():IsExists(s.IL4Filter,1,nil)
+	and not c:GetOverlayGroup():IsExists(s.IFNFilter,1,nil)
 end
 function s.ManifestCondition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
