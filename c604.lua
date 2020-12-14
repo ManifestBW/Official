@@ -210,7 +210,6 @@ function s.AnticipateOperation(e,tp,eg,ep,ev,re,r,rp)
 	if tc:IsCode(ac) then
 		Duel.ChangePosition(tc,POS_FACEUP)
 		Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)
-		tc:AddCounter(0x1108,1)
 		local code=Duel.CreateToken(tp,200)
 		Duel.SpecialSummonStep(code,0,tp,tp,false,false,POS_FACEUP_ATTACK)
 		Duel.Equip(tp,code,c,false)
