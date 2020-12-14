@@ -18,7 +18,7 @@ function s.initial_effect(c)
 	e1:SetRange(LOCATION_EXTRA)
 	--e1:SetCondition(s.ManifestCondition)
 	--e1:SetCost(s.ManifestCost)
-	--e1:SetTarget(s.ManifestTarget)
+	e1:SetTarget(s.ManifestTarget)
 	e1:SetOperation(s.ManifestOperation)
 	c:RegisterEffect(e1)
 
