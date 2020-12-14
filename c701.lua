@@ -123,7 +123,7 @@ function s.initial_effect(c)
 end
 
 function s.stfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsLocation(LOCATION_DECK)
+	return c:IsType(TYPE_PENDULUM)
 end
 
 function s.stop(e,tp,eg,ep,ev,re,r,rp)
