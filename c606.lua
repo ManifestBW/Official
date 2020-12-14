@@ -196,6 +196,13 @@ function s.XYZOperation(e,tp,chk)
 end
 
 --Manifest (e1)
+function s.ManifestFilter(c,tp,lc)
+	return c:IsFaceup()
+	and c:IsCode(604)
+	--and c:GetOverlayGroup():IsExists(s.IL2Filter,1,nil)
+	--and c:GetOverlayGroup():IsExists(s.IL4Filter,1,nil)
+	--and not c:GetOverlayGroup():IsExists(s.IFNFilter,1,nil)
+end
 function s.ManifestCondition(e,tp,eg,ep,ev,re,r,rp)
 	return tp==Duel.GetTurnPlayer()
 end
@@ -204,15 +211,27 @@ function s.ManifestCost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
 end
 function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) end
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) 
-	end
+	if chkc then return chkc:IsLocation(LOCATION_MZONE) and s.spfilter(chkc,tp) end
+	if chk==0 then return e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false)
+		and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsExistingTarget(s.ManifestFilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,tp) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
+	Duel.SelectTarget(tp,s.ManifestFilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,tp)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
-	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)
+	local tc=Duel.GetFirstTarget()
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0
+		and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
+		local mg=tc:GetOverlayGroup()
+		local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x8,1),tp,LOCATION_ONFIELD,0,c)
+		if #mg~=0 then
+			Duel.Overlay(c,mg)
+		end
+		Duel.Overlay(c,Group.FromCards(tc))
+		c:SetMaterial(Group.FromCards(tc))
+	end
 end
 
 --Anticipate from Hand (e2)
