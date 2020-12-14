@@ -8,7 +8,7 @@ function s.initial_effect(c)
 	c:EnableCounterPermit(0x1b)
 	--!counter 0x8 Distress Counter
 	--!counter 0x1b ATP Counter
-	Xyz.AddProcedure(c,s.MainFilter,6,3,s.CytokineFilter,aux.Stringid(id,0),3,s.XYZOperation)
+	Xyz.AddProcedure(c,s.MainFilter,4,4,s.CytokineFilter,aux.Stringid(id,0),3,s.XYZOperation)
 
 	--Manifest (e1)
 	local e1=Effect.CreateEffect(c)
@@ -185,9 +185,9 @@ end
 function s.CytokineFilter(c,tp,lc)
 	return c:IsFaceup()
 	and c:IsSummonCode(lc,SUMMON_TYPE_XYZ,tp,604)
-	and c:GetOverlayGroup():IsExists(s.IL2Filter,1,nil)
-	and c:GetOverlayGroup():IsExists(s.IL4Filter,1,nil)
-	and not c:GetOverlayGroup():IsExists(s.IFNFilter,1,nil)
+	--and c:GetOverlayGroup():IsExists(s.IL2Filter,1,nil)
+	--and c:GetOverlayGroup():IsExists(s.IL4Filter,1,nil)
+	--and not c:GetOverlayGroup():IsExists(s.IFNFilter,1,nil)
 end
 function s.XYZOperation(e,tp,chk)
 	if chk==0 then return Duel.GetFlagEffect(tp,id)==0 end
