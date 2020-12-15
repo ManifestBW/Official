@@ -3,6 +3,8 @@
 local s,id=GetID()
 function s.initial_effect(c)
 	c:EnableReviveLimit()
+	Pendulum.AddProcedure(c)
+
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE)
 	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
@@ -10,4 +12,5 @@ function s.initial_effect(c)
 	e1:SetLocation(LOCATION_HAND+LOCATION_FIELD)
 	e1:SetValue(TYPE_PENDULUM)
 	c:RegisterEffect(e1)
+
 end
