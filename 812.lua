@@ -14,7 +14,7 @@ function s.initial_effect(c)
 
 end
 
-function s.filter(c)
+function s.AnticipateFilter(c)
 	return c:IsFacedown()
 end
 
@@ -33,7 +33,7 @@ function s.AnticipateOperation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
 	if not (e:GetHandler():IsRelateToEffect(e) and tc:IsRelateToEffect(e)) then return end
-	if tc:IsCode(ac) then
+	if tc:IsCode(ac) and tc:IsCode(1) then
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
