@@ -120,7 +120,7 @@ function s.initial_effect(c)
 	--e12:SetTarget(s.cftg11)
 	--e12:SetOperation(s.cfop11)
 	--c:RegisterEffect(e12)
-	--idk
+	
 end
 
 function s.stfilter(c)
@@ -168,8 +168,8 @@ end
 
 --Light Microscopy
 function s.cost2(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,2,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,0x1b,1,REASON_COST)
 end
 function s.cftg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsFacedown() end
@@ -181,6 +181,7 @@ function s.cfop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,1))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,1))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,1))
 	e:SetLabel(op)
@@ -189,8 +190,8 @@ end
 
 --Catalase Test
 function s.cost3(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,2,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,0x1b,1,REASON_COST)
 end
 function s.cftg3(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsFacedown() end
@@ -202,6 +203,7 @@ function s.cfop3(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,2))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,2))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,2))
 	e:SetLabel(op)
@@ -223,6 +225,7 @@ function s.cfop4(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,3))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,3))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,3))
 	e:SetLabel(op)
@@ -244,6 +247,7 @@ function s.cfop5(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,4))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,4))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,4)) 
 	e:SetLabel(op)
@@ -265,6 +269,7 @@ function s.cfop6(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,5))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,5))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,5))
 	e:SetLabel(op)
@@ -273,8 +278,8 @@ end
 
 --Lactose Fermentation Test
 function s.cost7(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,2,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,0x1b,1,REASON_COST)
 end
 function s.cftg7(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsFacedown() end
@@ -286,6 +291,7 @@ function s.cfop7(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,6))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,6))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,6))  
 	e:SetLabel(op)
@@ -307,6 +313,7 @@ function s.cfop8(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,7))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,7))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,7))
 	e:SetLabel(op)
@@ -329,6 +336,7 @@ function s.cfop9(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,8))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,8))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,8)) 
 	e:SetLabel(op)
@@ -351,6 +359,7 @@ function s.cfop10(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,9))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,9))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,9))
 	e:SetLabel(op)
@@ -360,8 +369,8 @@ end
 --Capsule Stain
 
 function s.cost11(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,2,REASON_COST) end
-	Duel.RemoveCounter(tp,1,0,0x1b,2,REASON_COST)
+	if chk==0 then return Duel.IsCanRemoveCounter(tp,1,0,0x1b,1,REASON_COST) end
+	Duel.RemoveCounter(tp,1,0,0x1b,1,REASON_COST)
 end
 function s.cftg11(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_ONFIELD) and chkc:IsFacedown() end
@@ -373,6 +382,7 @@ function s.cfop11(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(1-tp,aux.Stringid(code,10))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,10))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,10)) 
 	e:SetLabel(op)
