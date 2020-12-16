@@ -120,6 +120,7 @@ function s.initial_effect(c)
 	--e12:SetTarget(s.cftg11)
 	--e12:SetOperation(s.cfop11)
 	--c:RegisterEffect(e12)
+	--idk
 end
 
 function s.stfilter(c)
