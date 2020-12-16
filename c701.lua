@@ -158,6 +158,7 @@ function s.cfop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc and tc:IsRelateToEffect(e) and tc:IsFacedown() then
 	local code=tc:GetOriginalCode()
+	local op=Duel.SelectOption(tp,aux.Stringid(code,0))
 	Duel.Hint(HINT_MESSAGE,tp,aux.Stringid(code,0))
 	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(code,0))
 	Duel.Hint(HINT_EVENT,tp,HINT_SELECTMSG)
