@@ -372,7 +372,7 @@ function s.desrepop(e,tp,eg,ep,ev,re,r,rp)
 	c:RegisterEffect(e1)
 end
 function s.HelperFilter(c,tp)
-	return c:IsCode(41,600402)
+	return c:IsCode(941,606)
 end
 
 --function s.BanCon(e,tp,eg,ep,ev,re,r,rp)
