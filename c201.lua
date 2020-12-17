@@ -376,7 +376,8 @@ end
 
 --Crackle (e18) 
 function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetBattledGroupCount()>0
+	return e:GetHandler():GetBattledGroupCount()>0 
+	--and Duel.GetAttackTarget()==nil
 end
 
 function s.CrackleTarget(e,c)
@@ -384,8 +385,9 @@ function s.CrackleTarget(e,c)
 end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
 	local c=e:GetHandler()
-	c:RemoveCounter(0x8,3)
-	tc:AddCounter(0x8,3)
+	local tc=Duel.GetFirstTarget()
+	local ct=c:GetCounter(0x8)
+	c:RemoveCounter(tp,0x8,ct)
+	tc:AddCounter(0x8,ct)
 end
