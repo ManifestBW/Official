@@ -154,11 +154,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e15)
 
 	local e17=Effect.CreateEffect(c)
-	e17:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e17:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e17:SetCode(EVENT_PHASE+PHASE_BATTLE)
 	e17:SetCondition(s.CrackleCondition)
 	e17:SetOperation(s.CrackleOperation)
 	e17:SetTarget(s.CrackleOperation)
-	e17:SetCode(EVENT_BATTLE_DAMAGE)
 	e17:SetTargetRange(0,1)
 	c:RegisterEffect(e17)
 
@@ -375,7 +375,7 @@ end
 
 --Crackle (e18) 
 function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp and Duel.GetAttackTarget()==nil
+	return ep~=tp and e:GetHandler():GetBattledGroupCount()>0 and Duel.GetAttackTarget()==nil
 end
 
 function s.CrackleTarget(e,c)
