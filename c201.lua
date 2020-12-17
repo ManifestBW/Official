@@ -153,14 +153,16 @@ function s.initial_effect(c)
 	e15:SetValue(10)
 	c:RegisterEffect(e15)
 
-	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_BATTLE_DAMAGE)
-	e1:SetCondition(s.CrackleCondition)
-	e1:SetOperation(s.CrackleOperation)
-	c:RegisterEffect(e1)
+	local e17=Effect.CreateEffect(c)
+	e17:SetDescription(aux.Stringid(id,0))
+	e17:SetCategory(CATEGORY_TOGRAVE)
+	e17:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e17:SetCode(EVENT_BATTLE_DAMAGE)
+	e17:SetCondition(s.CrackleCondition)
+	e17:SetOperation(s.CrackleOperation)
+	e17:SetTarget(s.CrackleOperation)
+	e17:SetTargetRange(0,1)
+	c:RegisterEffect(e17)
 
 	--Fabricate Distress Counters (e18)
 	local e18=Effect.CreateEffect(c)
@@ -376,6 +378,10 @@ end
 --Crackle (e18) 
 function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
 	return ep~=tp and Duel.GetAttackTarget()==nil
+end
+
+function s.CrackleTarget(e,c)
+	return c:IsType(TYPE_FIELD)
 end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
