@@ -376,7 +376,7 @@ end
 
 --Crackle (e18) 
 function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
-	return ep~=tp and e:GetHandler():GetBattledGroupCount()>0 and Duel.GetAttackTarget()==nil
+	return e:GetHandler():GetBattledGroupCount()>0
 end
 
 function s.CrackleTarget(e,c)
