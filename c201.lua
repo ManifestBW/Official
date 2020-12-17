@@ -133,7 +133,7 @@ function s.initial_effect(c)
 	e13:SetCountLimit(1)
 	c:RegisterEffect(e13)
 
-	--Sealed Ability: Onslaught (14)
+	--Sealed Ability: Onslaught (e14)
 	local e14=Effect.CreateEffect(c)
 	e14:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e14:SetCode(EVENT_DAMAGE_STEP_END)
@@ -143,7 +143,7 @@ function s.initial_effect(c)
 	e14:SetValue(10)
 	c:RegisterEffect(e14)
 
-	--Unsealed Ability: Onslaught (15)
+	--Unsealed Ability: Onslaught (e15)
 	local e15=Effect.CreateEffect(c)
 	e15:SetType(EFFECT_TYPE_XMATERIAL+EFFECT_TYPE_TRIGGER_O)
 	e15:SetProperty(EFFECT_FLAG_NO_TURN_RESET)
@@ -152,6 +152,28 @@ function s.initial_effect(c)
 	e15:SetOperation(s.OnslaughtOperation)
 	e15:SetValue(10)
 	c:RegisterEffect(e15)
+
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetCode(EVENT_BATTLE_DAMAGE)
+	e1:SetCondition(s.CrackleCondition)
+	e1:SetOperation(s.CrackleOperation)
+	c:RegisterEffect(e1)
+
+	--Fabricate Distress Counters (e18)
+	local e18=Effect.CreateEffect(c)
+	e18:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e18:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e18:SetCode(EVENT_SUMMON_SUCCESS)
+	e18:SetRange(LOCATION_MZONE)
+	e18:SetTarget(s.DistressTarget)
+	e18:SetOperation(s.DistressOperation)
+	c:RegisterEffect(e18)
+	local e19=e18:Clone()
+	e19:SetCode(EVENT_SPSUMMON_SUCCESS)
+	c:RegisterEffect(e19)
 
 end
 
@@ -337,5 +359,32 @@ function s.OnslaughtOperation(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_BATTLE+PHASE_DAMAGE_CAL)
 		c:RegisterEffect(e1)
+	end
+end
+
+--Cough (e16)
+function s.DistressTarget(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_COUNTER,nil,2,0,0x8)
+end
+function s.DistressOperation(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x8,1),tp,LOCATION_MZONE,0,c)
+	g:ForEach(Card.AddCounter,0x8,1)
+end
+
+
+--Crackle (e18) 
+function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
+	return ep~=tp and Duel.GetAttackTarget()==nil
+end
+
+function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetFirstTarget()
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0
+		and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
+		local ctg=c:GetCounter(0x8)
+		c:RemoveCounter(0x8,ctg)
+		tc:AddCounter(0x8,ctg)
 	end
 end
