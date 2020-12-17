@@ -389,7 +389,7 @@ function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if c:IsRelateToEffect(e) then
 		local ctg=c:GetCounter(0x8)
-		c:RemoveCounter(0x8,ctg)
+		--c:RemoveCounter(0x8,ctg)
 		tc:AddCounter(0x8,ctg)
 	end
 end
