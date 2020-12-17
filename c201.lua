@@ -385,7 +385,7 @@ end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	local ct=e:GetHandler():GetCounter(0x8)
+	local c=e:GetHandler()
 	c:RemoveCounter(0x8,3)
 	tc:AddCounter(0x8,3)
 end
