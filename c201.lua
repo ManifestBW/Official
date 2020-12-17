@@ -380,8 +380,12 @@ function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
 	--and Duel.GetAttackTarget()==nil
 end
 
+function s.CrackleFilter(c,e)
+	return c:GetCode(700)
+end
+
 function s.CrackleTarget(e,c)
-	return c:IsType(TYPE_FIELD)
+	local g=Duel.GetMatchingGroup(s.CrackleFilter,tp,LOCATION_FZONE,0,1,1,nil,tp)
 end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
