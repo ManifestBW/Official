@@ -154,11 +154,12 @@ function s.initial_effect(c)
 	c:RegisterEffect(e15)
 
 	local e17=Effect.CreateEffect(c)
-	e17:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
+	e17:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
 	e17:SetCode(EVENT_PHASE+PHASE_BATTLE)
 	e17:SetCondition(s.CrackleCondition)
 	e17:SetOperation(s.CrackleOperation)
 	e17:SetTarget(s.CrackleOperation)
+	e17:SetRange(LOCATION_MZONE)
 	e17:SetTargetRange(0,1)
 	c:RegisterEffect(e17)
 
