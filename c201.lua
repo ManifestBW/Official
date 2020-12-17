@@ -154,13 +154,11 @@ function s.initial_effect(c)
 	c:RegisterEffect(e15)
 
 	local e17=Effect.CreateEffect(c)
-	e17:SetDescription(aux.Stringid(id,0))
-	e17:SetCategory(CATEGORY_TOGRAVE)
 	e17:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e17:SetCode(EVENT_BATTLE_DAMAGE)
 	e17:SetCondition(s.CrackleCondition)
 	e17:SetOperation(s.CrackleOperation)
 	e17:SetTarget(s.CrackleOperation)
+	e17:SetCode(EVENT_BATTLE_DAMAGE)
 	e17:SetTargetRange(0,1)
 	c:RegisterEffect(e17)
 
@@ -387,9 +385,7 @@ end
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) then
-		local ctg=c:GetCounter(0x8)
-		--c:RemoveCounter(0x8,ctg)
-		tc:AddCounter(0x8,ctg)
-	end
+	local ctg=c:GetCounter(0x8)
+	c:RemoveCounter(0x8,ctg)
+	tc:AddCounter(0x8,ctg)
 end
