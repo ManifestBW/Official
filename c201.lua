@@ -387,8 +387,7 @@ end
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0
-		and tc:IsRelateToEffect(e) and not tc:IsImmuneToEffect(e) then
+	if c:IsRelateToEffect(e) then
 		local ctg=c:GetCounter(0x8)
 		c:RemoveCounter(0x8,ctg)
 		tc:AddCounter(0x8,ctg)
