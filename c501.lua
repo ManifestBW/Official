@@ -15,7 +15,7 @@ function s.initial_effect(c)
 	--e1:SetCost(s.ManifestCost)
 	e1:SetTarget(s.ManifestTarget)
 	--e1:SetCondition(s.ManifestCondition)
-	--e1:SetOperation(s.ManifestOperation)
+	e1:SetOperation(s.ManifestOperation)
 	c:RegisterEffect(e1)
 	
 	--local e1=Effect.CreateEffect(c)
@@ -146,7 +146,7 @@ function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 	local g=Duel.SelectMatchingCard(tp,s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil)
-	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
+	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		local g=Duel.GetTargetCards(e)
 		--if ft<#g then return end
