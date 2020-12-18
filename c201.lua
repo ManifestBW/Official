@@ -389,11 +389,11 @@ end
 --end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
-	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x8,1),tp,LOCATION_FZONE,0,c)
-	g:ForEach(Card.AddCounter,0x8,1)
-	--local c=e:GetHandler()
+	local c=e:GetHandler()
+	local ct=c:GetCounter(0x8)
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x8,1),1-tp,LOCATION_FZONE,0,c)
+	g:ForEach(Card.AddCounter,0x8,ct)
 	--local tc=Duel.GetFirstTarget()
-	--local ct=c:GetCounter(0x8)
 	--c:RemoveCounter(tp,0x8,ct)
 	--tc:AddCounter(0x8,ct)
 end
