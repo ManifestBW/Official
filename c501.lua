@@ -131,7 +131,7 @@ end
 function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.AvatarFilter,tp,LOCATION_SZONE,0,1,nil,tp)
+		and Duel.IsExistingTarget(s.AvatarFilter,tp,LOCATION_DECK,0,1,nil,tp)
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
