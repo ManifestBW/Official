@@ -10,8 +10,6 @@ function s.initial_effect(c)
 
 	--Manifestation (e1)
 	local e1=Effect.CreateEffect(c)
-	e1:SetDescription(aux.Stringid(id,0))
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_EQUIP)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	--e1:SetCost(s.ManifestCost)
@@ -138,7 +136,7 @@ function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sg=Duel.GetMatchingGroup(s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil,tp)
-	local g=sg:RandomSelect(tp,1)
+	--local g=sg:RandomSelect(tp,1)
 	Duel.SetTargetCard(g)
 end
 
@@ -150,7 +148,7 @@ function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local tg=Duel.GetMatchingCard(s.PathogenFilter,tp,LOCATION_SZONE,0,1,nil,tp)
-	local g=tg:RandomSelect(tp,1)
+	--local g=tg:RandomSelect(tp,1)
 	local sc=g:GetFirst()
 	if sc then
 		Duel.Equip(tp,sc,tc,false)
