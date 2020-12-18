@@ -125,7 +125,8 @@ function s.AvatarFilter(c,tp)
 end
 
 function s.PathogenFilter(c,tp)
-	return c:IsFacedown() and c:IsCode(1,4)
+	return c:IsFacedown() 
+	--and c:IsCode(1,4)
 end
 
 function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
