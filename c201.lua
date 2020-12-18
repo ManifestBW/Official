@@ -381,7 +381,7 @@ function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function s.CrackleFilter(c,e)
-	if chk==0 then return c:IsCode(700)
+	if chk==0 then return c:IsCode(700) end
 end
 
 function s.CrackleTarget(e,c)
