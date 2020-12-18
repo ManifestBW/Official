@@ -137,8 +137,8 @@ function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
 	local sg=Duel.GetMatchingGroup(s.PathogenFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
-	local g=sg:RandomSelect(tp,1)
-	Duel.SetTargetCard(g)
+	--local g=sg:RandomSelect(tp,1)
+	Duel.SetTargetCard(sg)
 end
 
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
