@@ -13,7 +13,7 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	--e1:SetCost(s.ManifestCost)
-	--e1:SetTarget(s.ManifestTarget)
+	e1:SetTarget(s.ManifestTarget)
 	--e1:SetCondition(s.ManifestCondition)
 	--e1:SetOperation(s.ManifestOperation)
 	c:RegisterEffect(e1)
@@ -131,26 +131,27 @@ end
 function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_SZONE) and chkc:IsControler(tp) and s.eqfilter(chkc,tp) end
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingTarget(s.AvatarFilter,tp,LOCATION_DECK,0,1,nil,tp)
+		and Duel.IsExistingTarget(s._PathogenFilter,tp,LOCATION_SZONE,0,1,nil,tp)
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_EQUIP)
-	local sg=Duel.GetMatchingGroup(s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil,tp)
-	--local g=sg:RandomSelect(tp,1)
-	Duel.SetTargetCard(g)
+	local sg=Duel.GetMatchingGroup(s.PathogenFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
+	local tc=sg:RandomSelect(tp,1)
+	Duel.SetTargetCard(tc)
 end
 
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if not tc or not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) then return end
-	if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)==0 then return end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local tg=Duel.GetMatchingCard(s.PathogenFilter,tp,LOCATION_SZONE,0,1,nil,tp)
-	--local g=tg:RandomSelect(tp,1)
-	local sc=g:GetFirst()
-	if sc then
-		Duel.Equip(tp,sc,tc,false)
+	local g=Duel.SelectMatchingCard(tp,s.AnchorFilter,tp,LOCATION_DECK,0,1,1,nil)
+	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
+		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
+		local g=Duel.GetTargetCards(e)
+		--if ft<#g then return end
+		Duel.BreakEffect()
+		for tc in aux.Next(g) do
+			Duel.Equip(tp,tc,g,false)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_EQUIP_LIMIT)
@@ -159,6 +160,10 @@ function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetValue(s.AnchorLimit)
 			tc:RegisterEffect(e1)
 			tc:RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD,0,1)
-		sc:CompleteProcedure()
+		end
 	end
+end
+
+function s.AnchorLimit(e,c)
+	return e:GetOwner()==c
 end
