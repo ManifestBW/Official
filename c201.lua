@@ -158,7 +158,7 @@ function s.initial_effect(c)
 	e17:SetCode(EVENT_DAMAGE_STEP_END)
 	e17:SetCondition(s.CrackleCondition)
 	e17:SetOperation(s.CrackleOperation)
-	e17:SetTarget(s.CrackleTarget)
+	--e17:SetTarget(s.CrackleTarget)
 	e17:SetRange(LOCATION_MZONE)
 	e17:SetTargetRange(0,1)
 	c:RegisterEffect(e17)
@@ -376,22 +376,24 @@ end
 
 --Crackle (e18) 
 function s.CrackleCondition(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetBattledGroupCount()>0 
-	--and Duel.GetAttackTarget()==nil
+	return Duel.GetAttackTarget()==nil
+	--e:GetHandler():GetBattledGroupCount()>0 
 end
 
-function s.CrackleFilter(c,e)
-	if chk==0 then return c:IsCode(700) end
-end
+--function s.CrackleFilter(c,e)
+	--return c:GetCounter(0x1108)>0
+--end
 
-function s.CrackleTarget(e,c)
-	local g=Duel.GetMatchingGroup(s.CrackleFilter,tp,LOCATION_FZONE,0,1,1,nil,tp)
-end
+--function s.CrackleTarget(e,c)
+	--local g=Duel.GetMatchingGroup(s.CodeFilter,tp,LOCATION_FZONE,0,1,1,nil,tp)
+--end
 
 function s.CrackleOperation(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local tc=Duel.GetFirstTarget()
-	local ct=c:GetCounter(0x8)
-	c:RemoveCounter(tp,0x8,ct)
-	tc:AddCounter(0x8,ct)
+	local g=Duel.GetMatchingGroup(aux.FilterFaceupFunction(Card.IsCanAddCounter,0x8,1),tp,LOCATION_FZONE,0,c)
+	g:ForEach(Card.AddCounter,0x8,1)
+	--local c=e:GetHandler()
+	--local tc=Duel.GetFirstTarget()
+	--local ct=c:GetCounter(0x8)
+	--c:RemoveCounter(tp,0x8,ct)
+	--tc:AddCounter(0x8,ct)
 end
