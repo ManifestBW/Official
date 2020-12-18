@@ -145,7 +145,7 @@ function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	local g=Duel.SelectMatchingCard(tp,s.AnchorFilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil)
 	if Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
 		local g=Duel.GetTargetCards(e)
