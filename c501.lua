@@ -135,23 +135,24 @@ function s.ManifestTarget(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		--and Duel.IsExistingTarget(s.PathogenFilter,tp,LOCATION_SZONE,0,1,nil,tp)
 		--and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	--local ct=math.min((Duel.GetLocationCount(tp,LOCATION_SZONE)),1)
-	local g=Duel.GetMatchingGroup(s.PathogenFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
+	--local g=Duel.GetMatchingGroup(s.PathogenFilter,tp,LOCATION_SZONE,0,1,1,nil,tp)
 	--local g=sg:RandomSelect(tp,1)
-	Duel.SetTargetCard(g)
+	--Duel.SetTargetCard(g)
 end
 
 function s.ManifestOperation(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	local g=Duel.SelectMatchingCard(tp,s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil)
-	if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
+	local g1=Duel.SelectMatchingCard(tp,s.AvatarFilter,tp,LOCATION_DECK,0,1,1,nil)
+	local g2=Duel.SelectMatchingCard(tp,s.PathogenFilter,tp,LOCATION_SZONE,0,1,1,nil)
+	if Duel.SpecialSummon(g1,0,tp,tp,false,false,POS_FACEUP_ATTACK)~=0 then
 		local ft=Duel.GetLocationCount(tp,LOCATION_SZONE)
-		local g=Duel.GetTargetCards(e)
+		--local g=Duel.GetTargetCards(e)
 		--if ft<#g then return end
 		Duel.BreakEffect()
 		for tc in aux.Next(g) do
-			Duel.Equip(tp,tc,g,false)
+			Duel.Equip(tp,g2,g1,false)
 			local e1=Effect.CreateEffect(c)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_EQUIP_LIMIT)
